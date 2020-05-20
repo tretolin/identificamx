@@ -1,0 +1,62 @@
+Título del formulario: 
+
+Deja tus datos y nosotros te llamamos.
+
+Datos del formulario y orden de los mismos apilados en vertical:
+
+Nombres(s)
+Teléfono
+¿Agendar llamada?
+Fecha y hora
+Correo electrónico
+Mensaje
+
+Descripción de los campos:
+
+Nombres(s)
+- Requerido
+- Tipo input recibe texto solamente. 
+- Usar placeholder con la lleyenda "Nombre(s)"
+- Mínimo de caracteres 3
+- Máximo de caracteres 128
+- Single line, no es necesario text wrap ni multiline
+
+Teléfono
+- Opcional
+- Tipo input recibe numeros y el simbolo de + (si existe algún control con mascara de teléfono usalo) solamente. 
+- Usar placeholder con la lleyenda "Teléfono"
+- Mínimo de caracteres 10
+- Máximo de caracteres 18
+
+¿Agendar llamada?
+- Opcional
+- Tipo checkbox (en caso de seleccionarse habilitar y mostrar el siguiente combobox)
+- Mostrar en en mismo registro el texto ¿Agendar llamada?; y a su lado derecho mostrar el checkbox.
+
+Fecha y hora
+- Opcional
+- Combo box con las siguientes opciones.
+
+Hoy antes de las 12PM 
+Hoy después de las 12PM
+Mañana antes de las 12PM 
+Mañana después de las 12PM
+
+* De ser posible preselecciona el horario próximo siguiente.
+
+Correo electrónico
+- Requerido
+- Tipo email. 
+- Usar placeholder con la lleyenda "Correo electrónico"
+
+Mensaje
+- Opcional
+- Permitir números y letras.
+- Multi line.
+- Text wrap
+
+Agrega un captcha y el botón de enviar.
+
+Investiga la forma de mandar la ubucación de donde se hace la petición de ser posible, para mandarlo en el POST  y platicamos como me puedes mandar los datos del formulario y los datos de geo localización.
+
+Gracias.
