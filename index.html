@@ -8,12 +8,12 @@
     Document Title
     =============================================
     -->
-    <title>IdetificaMX</title>
+    <title>IdentificaMX</title>
     <!--  
     Favicons
     =============================================
     -->
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/favicons/apple-icon-57x57.png">
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="assets/images/favicons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/images/favicons/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicons/apple-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="76x76" href="assets/images/favicons/apple-icon-76x76.png">
@@ -26,7 +26,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json"> -->
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -58,7 +58,7 @@
     <div class="page-loader">
         <div class="loader">Loading...</div>
     </div>
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-custom mb-0" role="navigation">
         <div class="container" style="color:transparent">
             <button style="display:inline-block !important" class="navbar-toggle pt-0" type="button" data-toggle="collapse" data-target="#custom-collapse">
                 <div class="form-inline my-2 pt-4 my-lg-0">
@@ -73,7 +73,8 @@
         </div>.
         </div>
     </nav>
-    <section class="col-md-7 bg-dark-30 showcase-page-header module parallax-bg" style="padding: 0; margin-top: 69px;" data-background="">
+    <section class="col-md-7 showcase-page-header module parallax-bg mt-0" style="padding: 20px
+    ; margin-top: 69px;" data-background="">
         <div class="titan-caption">
             <video width="100%" autoplay muted loop style="display:block">
                 <source src="src/video/IdentificaMX_Demo_720p.mp4" type="video/mp4">
@@ -83,18 +84,17 @@
         </div> 
     </section>
     <div class="main showcase-page col-md-5">
-        <section class="module-medium" id="content">
+        <section id="content">
 
             <!-- CONTCT FORM -->
-          <div class="col-md-12 container bg-light" id="contacto">
-            <div class="text-center font-weight-bold" style="font-size: 58px;">CONTACTO</div>
+          <div class="col-md-12 container" id="contacto">
             <div class="">
                 <div class="col-sm-12 col-sm-6 col-md-12">
-                    <h2>Deja tus datos y nosotros te llamamos.</h2>
-                    <form class="p-4" style="margin-bottom: 30px">
+                    <h4 class="font-weight-bold" style="font-family: sans-serif; font-weight: bold;">Deja tus datos y nosotros te llamamos.</h4>
+                    <form class="p-4" style="margin-bottom: 30px" id="contact" method="post" >
                         <div class="form-group">
                           <label for="full-name">Nombre(s)</label>
-                          <input type="name" class="form-control" id="name" placeholder="Nombre(s)">
+                          <input type="name" class="form-control" id="name" name="name" placeholder="Nombre(s)">
                         </div>
     
                         <div class="form-group">
@@ -105,10 +105,11 @@
                             <label for="call">¿Agendar llamada? <input type="checkbox" id="call"/></label>
                         </div>
     
-                        <div class="form-group">
+                        <div class="form-group time-call">
                             <label for="date">Fecha y Hora</label>
-                            <select class="form-control">
-                                <option>Hoy antes de las 12PM</option>
+                            <select name="time" class="form-control">
+                                <option disabled="disabled" selected>Horario de llamada</option>
+                                <option class="before-12">Hoy antes de las 12PM</option>
                                 <option>Hoy después de las 12PM</option>
                                 <option>Mañana antes de las 12PM</option>
                                 <option>Mañana después de las 12PM</option>
@@ -135,18 +136,23 @@
         </section>
 
       </div>
-      <section class="module-extra-small bg-dark">
+      <section class="module-extra-small">
         <div class="container">
           <div class="row">
-            <div class="col-sm-6 col-md-8 col-lg-9">
-              <div class="callout-text font-alt">
-                  <h4 style="margin-top: 0px; font-;">Servicio de Credencialización</h4>
-                  <p style="margin-bottom: 0px;">Credencialización dígital y física</p>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
+      <div class="row">
+          <div class="bg-secondary">
+            <div class="col-12 bg-dark" style="overflow:auto">
+                <div class="callout-text font-alt" style="padding: 35px 60px !important">
+                    <h4 style="margin-top: 0px;">Servicio de Credencialización</h4>
+                    <p style="margin-bottom: 0px;">Credencialización dígital y física</p>
+                </div>
+              </div>
+          </div>
+      </div>
       <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
     </main>
     <!--  
@@ -166,12 +172,56 @@
     <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
     <script>
-        var widget = new ScheduleWidget();
-        var container = document.getElementById("scheduleContainer");
+        // var widget = new ScheduleWidget();
+        // var container = document.getElementById("scheduleContainer");
         // getElement() returns the root DOM node of the dynamically constructed widget.
-        container.appendChild(widget.getElement());
+        // container.appendChild(widget.getElement());
+
+        $(document).ready(function () {
+            // Checbox
+            $('.time-call').hide();
+            $('#call').change(function() {
+                if(this.checked) {
+                    $('.time-call').show();
+                }
+                else {
+                    $('.time-call').hide();
+                }
+            });
+
+            //Hours
+            var d = new Date();
+            var hours = d.getHours();
+            if (hours > 11) {
+                $('.before-12').attr('disabled','disabled');
+            }
+
+            $('#contact').validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 2,
+                        // letters: true
+                    }
+                }
+            });
+
+            $('#contact').submit(function (e) {
+                var validationFailed = false;
+                // do your validation here ...
+                if (validationFailed) {
+                    e.preventDefault();
+                    return false;
+                }
+                }); 
+
+            // jQuery.validator.addMethod("lettersonly", function(value, element) {
+            //     return this.optional(element) || /^[a-z]+$/i.test(value);
+            //     }, "Letters only please"); 
+        });
     </script>
   </body>
 </html>
