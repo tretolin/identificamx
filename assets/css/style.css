@@ -2925,3 +2925,6 @@ Google map
     width: 100%;
   }
 }
+
+/* custom */
+.error { color: #e44c4c; }
