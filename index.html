@@ -53,6 +53,13 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link id="color-scheme" href="assets/css/colors/default.css" rel="stylesheet">
   </head>
+  <style>
+    select option:disabled {
+        color:red;
+        font-weight: bold;
+        text-decoration:dashed;
+    }
+  </style>
   <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
     <main>
     <div class="page-loader">
@@ -75,7 +82,7 @@
     </nav>
     <section class="col-md-7 showcase-page-header module parallax-bg mt-0" style="padding: 20px
     ; margin-top: 69px;" data-background="">
-        <div class="titan-caption">
+        <div class="titan-caption hide">
             <video width="100%" autoplay muted loop style="display:block">
                 <source src="src/video/IdentificaMX_Demo_720p.mp4" type="video/mp4">
                 <source src="movie.ogg" type="video/ogg">
@@ -99,31 +106,31 @@
     
                         <div class="form-group">
                             <label for="phone-number">Teléfono</label>
-                            <input type="phone" class="form-control" id="phone" placeholder="Teléfono">
+                            <input name="phoneNumber" type="phone" class="form-control" id="phone" placeholder="Teléfono">
                         </div>
                             <div class="form-group">
-                            <label for="call">¿Agendar llamada? <input type="checkbox" id="call"/></label>
+                            <label for="call">¿Agendar llamada? <input id="callMe" name="callMe" type="checkbox"/></label>
                         </div>
     
                         <div class="form-group time-call">
                             <label for="date">Fecha y Hora</label>
-                            <select name="time" class="form-control">
-                                <option disabled="disabled" selected>Horario de llamada</option>
-                                <option class="before-12">Hoy antes de las 12PM</option>
-                                <option>Hoy después de las 12PM</option>
-                                <option>Mañana antes de las 12PM</option>
-                                <option>Mañana después de las 12PM</option>
+                            <select class="form-control" name="callMeMessage">
+                                <option disabled="disabled" value="" selected>Horario de llamada</option>
+                                <option value="Hoy antes de las 12PM" class="before-12">Hoy antes de las 12PM</option>
+                                <option value="Hoy después de las 12PM">Hoy después de las 12PM</option>
+                                <option value="Mañana antes de las 12PM<">Mañana antes de las 12PM</option>
+                                <option value="Mañana después de las 12PM">Mañana después de las 12PM</option>
                             </select>
                         </div>
     
                         <div class="form-group">
                             <label for="email">Correo electrónico</label>
-                            <input type="email" class="form-control" id="email" placeholder="Correo electrónico">
+                            <input name="email" type="email" class="form-control" id="email" placeholder="Correo electrónico">
                         </div>
     
                         <div class="form-group">
                             <label for="message">Mensaje</label>
-                            <textarea class="form-control" id="message" placeholder="Comentario"></textarea>
+                            <textarea class="form-control" name="message" placeholder="Comentario"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
@@ -175,21 +182,14 @@
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
     <script>
-        // var widget = new ScheduleWidget();
-        // var container = document.getElementById("scheduleContainer");
-        // getElement() returns the root DOM node of the dynamically constructed widget.
-        // container.appendChild(widget.getElement());
+
+
 
         $(document).ready(function () {
             // Checbox
             $('.time-call').hide();
-            $('#call').change(function() {
-                if(this.checked) {
-                    $('.time-call').show();
-                }
-                else {
-                    $('.time-call').hide();
-                }
+            $('#callMe').change(function() {
+                this.checked ? $('.time-call').show() : $('.time-call').hide();
             });
 
             //Hours
@@ -203,25 +203,66 @@
                 rules: {
                     name: {
                         required: true,
-                        minlength: 2,
+                        minlength: 3,
                         // letters: true
+                    },
+                    phoneNumber: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10,
+                        number: true
+                    },
+                    callMeMessage: {
+                        required: '#callMe:checked'
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    message: {
+                        required: true
                     }
+                },
+                messages: {
+                    name: {
+                        required: 'Este campo es requerido',
+                        minlength: 'Debe capturar al menos 3 caracteres'
+                    },
+                    phoneNumber: {
+                        required: 'Este campo es requerido',
+                        minlength: 'Se requieren 10 dígitos',
+                        maxlength: 'Se requieren 10 dígitos',
+                        number: 'Capture solo números'
+                    },
+                    callMeMessage: {
+                        required: 'Es necesario seleccionar un horario'
+                    },
+                    email: {
+                        required: 'Este campo es requerido',
+                        email: 'Ingrese una dirección de correeo válida'
+                    },
+                    message: {
+                        required: 'Este campo es requerido'
+                    }
+                },
+                submitHandler: function(form, event) {
+                    event.preventDefault();
+
+                    let formData = $('#contact').serialize();
+                    $.ajax({
+                        url: 'https://appointment.photocapture.io/appointment/register',
+                        method: 'POST',
+                        data: formData,
+                        contentType : 'application/json',
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
+                        },
+                    }).done(function(response){ //
+                        console.log('Response', response)
+                    });
                 }
             });
-
-            $('#contact').submit(function (e) {
-                var validationFailed = false;
-                // do your validation here ...
-                if (validationFailed) {
-                    e.preventDefault();
-                    return false;
-                }
-                }); 
-
-            // jQuery.validator.addMethod("lettersonly", function(value, element) {
-            //     return this.optional(element) || /^[a-z]+$/i.test(value);
-            //     }, "Letters only please"); 
         });
-    </script>
-  </body>
+        </script>
+    </body>
 </html>
