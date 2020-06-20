@@ -82,7 +82,7 @@
     </nav>
     <section class="col-md-7 showcase-page-header module parallax-bg mt-0" style="padding: 20px
     ; margin-top: 69px;" data-background="">
-        <div class="titan-caption hide">
+        <div class="titan-caption">
             <video width="100%" autoplay muted loop style="display:block">
                 <source src="src/video/IdentificaMX_Demo_720p.mp4" type="video/mp4">
                 <source src="movie.ogg" type="video/ogg">
@@ -99,6 +99,7 @@
                 <div class="col-sm-12 col-sm-6 col-md-12">
                     <h4 class="font-weight-bold" style="font-family: sans-serif; font-weight: bold;">Deja tus datos y nosotros te llamamos.</h4>
                     <form class="p-4" style="margin-bottom: 30px" id="contact" method="post" >
+                        
                         <div class="form-group">
                           <label for="full-name">Nombre(s)</label>
                           <input type="name" class="form-control" id="name" name="name" placeholder="Nombre(s)">
@@ -132,6 +133,9 @@
                             <label for="message">Mensaje</label>
                             <textarea class="form-control" name="message" placeholder="Comentario"></textarea>
                         </div>
+
+                        <div class="g-recaptcha" data-sitekey="6LeOA6cZAAAAAI4OgYucadSvDCxW4ff2F9HH4zJj"></div>
+
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
     
@@ -180,6 +184,7 @@
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/jquery.serializejson.js"></script>
+    <script src="assets/js/main.js"></script>
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
     <script>
