@@ -98,16 +98,16 @@
             <div class="">
                 <div class="col-sm-12 col-sm-6 col-md-12">
                     <h4 class="font-weight-bold" style="font-family: sans-serif; font-weight: bold;">Deja tus datos y nosotros te llamamos.</h4>
-                    <form class="p-4" style="margin-bottom: 30px" id="contact" method="post" >
+                    <form class="p-4" style="margin-bottom: 30px" id="contact" method="post">
                         
                         <div class="form-group">
                           <label for="full-name">Nombre(s)</label>
-                          <input type="name" class="form-control" id="name" name="name" placeholder="Nombre(s)">
+                          <input type="name" class="form-control" id="name" name="name" placeholder="Nombre(s)" value="Luis Treto">
                         </div>
     
                         <div class="form-group">
                             <label for="phone-number">Teléfono</label>
-                            <input name="phoneNumber" type="phone" class="form-control" id="phone" placeholder="Teléfono">
+                            <input name="phoneNumber" type="phone" class="form-control" id="phone" placeholder="Teléfono"  value="0000000000">
                         </div>
                             <div class="form-group">
                             <label for="call">¿Agendar llamada? <input id="callMe" name="callMe" type="checkbox" data-unchecked-value="false" /></label>
@@ -126,15 +126,17 @@
     
                         <div class="form-group">
                             <label for="email">Correo electrónico</label>
-                            <input name="email" type="email" class="form-control" id="email" placeholder="Correo electrónico">
+                            <input name="email" type="email" class="form-control" id="email" placeholder="Correo electrónico" value="luis@mail.com">
                         </div>
     
                         <div class="form-group">
                             <label for="message">Mensaje</label>
-                            <textarea class="form-control" name="message" placeholder="Comentario"></textarea>
+                            <textarea class="form-control" name="message" placeholder="Comentario">Comentario de ejemplo</textarea>
                         </div>
 
-                        <div class="g-recaptcha" style="width: 100%" data-sitekey="6LeOA6cZAAAAAI4OgYucadSvDCxW4ff2F9HH4zJj"></div>
+                        <!-- <div style="padding-bottom: 15px">
+                            <div class="g-recaptcha" style="width: 100%" data-sitekey="6LeOA6cZAAAAAI4OgYucadSvDCxW4ff2F9HH4zJj"></div>
+                        </div> -->
 
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
@@ -166,6 +168,28 @@
       </div>
       <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
     </main>
+
+    <div class="modal fade modal-success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog" role="document">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 10px; cursor: pointer">
+                <span aria-hidden="true">×</span>
+            </button> -->
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 40px">
+                    <p style="    font-weight: bold; font-size: 32px; text-align: center; margin-bottom: 20px; line-height: 37px;">
+                        Gracias por contactarnos
+                    </p>
+                <div style="font-size: 18px; text-align: center; line-height: 26px; padding: 0px 20%;">
+                    Nos pondremos en contacto contigo dentro del horario seleccionado
+                </div>
+            </div>
+        </div>
+    </div>
     <!--  
     JavaScripts
     =============================================
@@ -274,7 +298,16 @@
                             xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
                         },
                     }).done(function(response){ //
-                        console.log('Response', response);
+                        let status = response.status;
+                        if (status == 200) {
+                            $('.modal-success').modal('show')
+                            $('input[type="name"]','#contact').val('');
+                            $('input[type="phone"]','#contact').val('');
+                            $('input[type="email"]','#contact').val('');
+                            $('textarea','#contact').val('');
+                            $('select','#contact').val('');
+                            console.log('Registro exitoso');
+                        }
                     }).fail(function(response){
                         console.log('Error', response);
                     });
