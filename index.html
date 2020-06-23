@@ -135,7 +135,9 @@
                         </div>
 
                         <div style="padding-bottom: 15px">
-                            <div class="g-recaptcha" style="width: 100%" data-sitekey="6Lfo3KcZAAAAALVCNljWsOsx7AEioamcGpQpoWx1"></div>
+                            <div class="g-recaptcha" style="width: 100%"
+                            data-sitekey="6Lfo3KcZAAAAALVCNljWsOsx7AEioamcGpQpoWx1"
+                            data-callback="recaptchaCallback"></div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Enviar</button>
@@ -231,7 +233,12 @@
                 $('.before-12').attr('disabled','disabled');
             }
 
+            function recaptchaCallback() {
+                $('.g-recaptcha').eq(0).valid();
+            };
+
             $('#contact').validate({
+                ignore: ".ignore",
                 rules: {
                     name: {
                         required: true,
@@ -275,6 +282,15 @@
                     },
                     message: {
                         required: 'Este campo es requerido'
+                    },
+                    hiddenRecaptcha: {
+                        required: function () {
+                            if (grecaptcha.getResponse() == '') {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
                     }
                 },
                 submitHandler: function(form, event) {
