@@ -296,7 +296,12 @@
                 submitHandler: function(form, event) {
                     event.preventDefault();
 
-                    let formData = JSON.stringify($('#contact').serializeJSON({
+                    var response = grecaptcha.getResponse();
+
+                    if(response.length == 0){
+                        alert("Captcha no verificado")
+                    } else {
+                        let formData = JSON.stringify($('#contact').serializeJSON({
                         checkboxUncheckedValue: 'NOPE', 
                         parseBooleans: true, 
                         parseNumbers: true
@@ -324,6 +329,7 @@
                     }).fail(function(response){
                         console.log('Error', response);
                     });
+                    }
                 }
             });
         });
